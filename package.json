@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "faster-hosts",
+  "name": "FasterHosts",
   "scripts": {},
   "devDependencies": {
     "@types/chrome": "^0.0.139",
