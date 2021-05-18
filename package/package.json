@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "name": "faster-hosts",
+  "version": "0.1.0",
+  "scripts": {},
+  "devDependencies": {
+    "@types/chrome": "^0.0.139",
+    "typescript": "^4.2.4"
+  }
+}
