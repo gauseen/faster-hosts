@@ -1,0 +1,21 @@
+{
+  "name": "Awesome Extension",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "create-react-app for extensions",
+  "icons": {
+    "128": "logo128.png"
+  },
+  "permissions": [],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "logo128.png",
+    "default_popup": "popup.html"
+  },
+  "options_page": "index.html"
+}
