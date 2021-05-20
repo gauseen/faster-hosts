@@ -1,0 +1,30 @@
+ul.side_menu {
+  box-sizing: border-box;
+  width: 25%;
+  padding: 0;
+  margin: 0;
+  flex-shrink: 1;
+  list-style-type: none;
+  overflow: auto;
+  background-color: #eef1f3;
+}
+
+.side_menu_item {
+  padding-left: 6px;
+  padding-right: 3px;
+  margin: 8px 0;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.side_menu_item__selected {
+  background-color: #2a6cb1;
+}
+
+.side_menu_item_editor {
+  cursor: pointer;
+  width: 14px;
+  height: auto;
+}

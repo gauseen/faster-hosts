@@ -9,12 +9,12 @@
     "background.js": "/background.js",
     "public/favicon.ico": "/public/favicon.ico",
     "public/icons/128.png": "/public/icons/128.png",
-    "public/manifest.json": "/public/manifest.json",
-    "static/media/logo.svg": "/static/media/logo.6ce24c58.svg"
+    "public/manifest.json": "/public/manifest.json"
   },
   "entrypoints": [
     "static/js/bundle.js",
     "static/js/vendors~main.chunk.js",
-    "static/js/main.chunk.js"
+    "static/js/main.chunk.js",
+    "main.fff4bc9c0c3e1e191855.hot-update.js"
   ]
 }

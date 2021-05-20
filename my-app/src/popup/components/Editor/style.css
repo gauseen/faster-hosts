@@ -1,0 +1,39 @@
+.hosts_editor {
+  box-sizing: border-box;
+  width: 80%;;
+  height: 200px;
+}
+
+:root {
+  --swh-editor-text-color: #000;
+
+  --swh-editor-bg-color: #fff;
+  --swh-editor-ip: #096dd9;
+  --swh-editor-keyword: #06427d;
+  --swh-editor-error: #c36;
+  --swh-editor-comment: #090;
+  --swh-editor-hl-bg: #ff0;
+}
+
+.CodeMirror {
+  font-size: 14px;
+  background: var(--swh-editor-bg-color);
+  color: var(--swh-editor-text-color);
+}
+
+.cm-s-default .cm-comment {
+  color: var(--swh-editor-comment);
+}
+
+.cm-s-default .cm-ip {
+  color: var(--swh-editor-ip);
+  font-weight: bold;
+}
+
+.cm-s-default .cm-error {
+  color: var(--swh-editor-error);
+}
+
+.cm-s-default .cm-hl {
+  background: var(--swh-editor-hl-bg);
+}
