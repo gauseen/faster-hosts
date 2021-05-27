@@ -7,14 +7,14 @@
     "vendors~main.js": "/static/js/vendors~main.chunk.js",
     "vendors~main.js.map": "/static/js/vendors~main.chunk.js.map",
     "background.js": "/background.js",
-    "public/favicon.ico": "/public/favicon.ico",
-    "public/icons/128.png": "/public/icons/128.png",
-    "public/manifest.json": "/public/manifest.json"
+    "favicon.ico": "/favicon.ico",
+    "icons/128.png": "/icons/128.png",
+    "manifest.json": "/manifest.json"
   },
   "entrypoints": [
     "static/js/bundle.js",
     "static/js/vendors~main.chunk.js",
     "static/js/main.chunk.js",
-    "main.fff4bc9c0c3e1e191855.hot-update.js"
+    "main.46c9dde29a954a92c0ed.hot-update.js"
   ]
 }

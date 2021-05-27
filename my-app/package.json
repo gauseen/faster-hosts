@@ -76,6 +76,7 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "devDependencies": {
+    "@types/chrome": "^0.0.139",
     "@types/codemirror": "^5.60.0",
     "copy-webpack-plugin": "^6.4.1",
     "customize-cra": "^1.0.0",

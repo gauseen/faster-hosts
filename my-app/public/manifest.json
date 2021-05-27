@@ -13,7 +13,10 @@
     },
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "permissions": [
-        "webRequest", "webRequestBlocking", "<all_urls>"
+      "storage",
+      "webRequest",
+      "webRequestBlocking",
+      "<all_urls>"
     ],
     "author": "https://github.com/gauseen",
     "homepage_url": "https://github.com/gauseen/"

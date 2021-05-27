@@ -45,4 +45,11 @@ chrome.runtime.onInstalled.addListener(function() {
   setInterval(start, POLLING_TIME)
 })
 
+chrome.storage.sync.get(['ACTIVE_HOSTS_ID'], function (result) {
+  console.log('Value get is ' + result.testKey1);
+})
+
+chrome.storage.sync.get("__HOSTS", function (items) {
+  console.log('__HOSTS ' + JSON.stringify(items));
+})
 

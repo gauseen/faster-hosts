@@ -559,6 +559,20 @@ module.exports = function (webpackEnv) {
       ],
     },
     plugins: [
+      new CopyPlugin({
+        patterns: [
+        {
+          from: 'public',
+          globOptions: {
+            dot: true,
+            gitignore: true,
+            ignore: ['**/index.html'],
+          },
+          to: ''
+        },
+        { from: 'src/background.js', to: '' }
+       ],
+      }),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
@@ -738,20 +752,6 @@ module.exports = function (webpackEnv) {
               }),
             },
           },
-        }),
-        new CopyPlugin({
-          patterns: [
-          {
-            from: 'public/**/*',
-            globOptions: {
-              dot: true,
-              gitignore: true,
-              ignore: ['**/index.html'],
-            },
-            to: ''
-          },
-          { from: 'src/background.js', to: '' }
-         ],
         }),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
