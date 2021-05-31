@@ -1,11 +1,20 @@
 @import '~antd/dist/antd.css';
 
+#root {
+  height: 100%;
+}
+
 .faster_hosts {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   position: relative;
   border: 1px solid ;
 }
 
 .faster_hosts_body {
   width: 100%;
+  overflow: hidden;
   display: flex;
+  flex: 1;
 }

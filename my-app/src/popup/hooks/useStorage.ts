@@ -5,7 +5,7 @@ const useStorage = <T = any>(key: string) => {
 
   useEffect(() => {
     const getAllStorage = () => {
-      chrome.storage.sync.get([key], function (val) {
+      chrome?.storage?.sync?.get([key], function (val) {
         setStorage(val[key])
       })
     }
@@ -19,9 +19,9 @@ const useStorage = <T = any>(key: string) => {
       //   );
       // }
     // }
-    chrome.storage.onChanged.addListener(getAllStorage);
+    chrome?.storage?.onChanged?.addListener(getAllStorage);
 
-    return () => chrome.storage.onChanged.removeListener(getAllStorage)
+    return () => chrome?.storage?.onChanged?.removeListener(getAllStorage)
   }, [])
 
   return {

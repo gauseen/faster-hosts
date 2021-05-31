@@ -1,6 +1,7 @@
 ul.side_menu {
   box-sizing: border-box;
   width: 25%;
+  min-width: 25%;
   padding: 0;
   margin: 0;
   flex-shrink: 1;
@@ -15,16 +16,36 @@ ul.side_menu {
   margin: 8px 0;
   height: 30px;
   display: flex;
+  flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+}
+
+.side_menu_item_title {
+  width: 65%;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  /* autoprefixer: ignore next */
+  box-orient: vertical;
+  /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  overflow: hidden;
 }
 
 .side_menu_item__selected {
   background-color: #2a6cb1;
 }
 
-.side_menu_item_editor {
-  cursor: pointer;
+.side_menu_item_editor,
+.side_menu_item_logo
+{
   width: 14px;
   height: auto;
+  margin-right: 2px;
+}
+
+.side_menu_item_editor {
+  cursor: pointer;
 }

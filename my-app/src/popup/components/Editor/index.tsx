@@ -15,10 +15,11 @@ interface EditorProps {
   readOnly?: boolean;
   content?: string;
   onChange?: (value?: string) => void;
+  onBlur?: (value?: string) => void;
 }
 
 const Editor: React.FC<EditorProps> = (props) => {
-  const { readOnly, content, onChange } = props
+  const { readOnly, content, onChange, onBlur } = props
 
   const ref = useRef<HTMLTextAreaElement>(null)
   const editorRef = useRef<CodeMirror.EditorFromTextArea | null>(null)
@@ -37,11 +38,24 @@ const Editor: React.FC<EditorProps> = (props) => {
 
     editor.setSize('100%', '100%')
 
-    editor.on('change', (editor) => {
+    const blurFunc = (editor: CodeMirror.Editor) => {
+      const value = editor.getDoc().getValue()
+      onBlur?.(value)
+    }
+
+    const changeFunc = (editor: CodeMirror.Editor) => {
       const value = editor.getDoc().getValue()
       onChange?.(value)
-    })
-  }, []);
+    }
+
+    editor.on('blur', blurFunc)
+    editor.on('change', changeFunc)
+
+    return () => {
+      editor.off('blur', blurFunc)
+      editor.off('change', changeFunc)
+    }
+  }, [onBlur, onChange]);
 
   useEffect(() => {
     if (!editorRef.current) return

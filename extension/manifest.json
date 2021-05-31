@@ -7,7 +7,7 @@
     },
     "description": "加快访问",
     "background": {
-        "scripts": ["js/utils.js", "js/background.js"]
+        "scripts": ["background.js"]
     },
     "permissions": [
         "webRequest", "webRequestBlocking", "<all_urls>"

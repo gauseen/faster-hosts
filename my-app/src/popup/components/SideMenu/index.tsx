@@ -2,13 +2,22 @@ import { Switch } from 'antd';
 import React, { useState, useEffect } from 'react'
 import useStorage from '../../hooks/useStorage';
 import editorIcon from '../../images/editor.png'
+import networkIcon from '../../images/network.png'
+import docIcon from '../../images/doc.png'
 import { USING_HOSTS_ID } from '../../../const'
+import { HostsTypeEnum } from '../HostsForm';
 
 import './style.css'
+
+const iconMap = {
+  [HostsTypeEnum.LOCAL]: docIcon,
+  [HostsTypeEnum.REMOTE]: networkIcon,
+}
 
 export interface MenuItem {
   title?: string;
   id?: string;
+  hostsType?: HostsTypeEnum;
 }
 
 interface SideMenuProps {
@@ -45,15 +54,20 @@ const SideMenu: React.FC<SideMenuProps> = (props) => {
   return (
     <ul className="side_menu">
       {list.map(item => {
+        const { hostsType } = item
         const selected = id === item.id
         return (
           <li onClick={() => handleClick(item)} className={`${selected ? 'side_menu_item__selected' : null} side_menu_item`} key={item.id}>
-            <span>{item.title}</span>
+            <span className="side_menu_item_title">
+              <img src={iconMap[hostsType!]} alt="icon" className="side_menu_item_logo" />
+              {item.title}
+            </span>
             <div>
               {selected && (
                 <div>
-                  <Switch checked={usingHostsId === item.id} onChange={(checked: boolean) => handleUsingChange(checked, item)} size="small" />
                   <img onClick={() => handleEditor(item)} className="side_menu_item_editor" src={editorIcon} alt="editor" />
+
+                  <Switch checked={usingHostsId === item.id} onChange={(checked: boolean) => handleUsingChange(checked, item)} size="small" />
                 </div>
               )}
             </div>

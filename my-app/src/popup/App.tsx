@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Drawer } from 'antd';
+import { Drawer, message } from 'antd';
 
 import Editor from './components/Editor'
 import Header from './components/Header'
@@ -20,7 +20,7 @@ function App() {
   const [visible, setVisible] = useState(false)
   const [content, setContent] = useState('')
 
-  const { storage } = useStorage<Record<string, Hosts>>(HOSTS)
+  const { storage = {} } = useStorage<Record<string, Hosts>>(HOSTS)
   const { storage: usingHostsId } = useStorage(USING_HOSTS_ID)
   const { storage: activeHostsId } = useStorage(ACTIVE_HOSTS_ID)
 
@@ -28,14 +28,15 @@ function App() {
     return Object.keys(storage).map(id => {
       return {
         id,
+        hostsType: storage[id]?.hostsType,
         title: storage[id]?.title
       }
     })
   }, [storage])
 
   const activeHosts = useMemo(() => {
-    return storage[activeHostsId || usingHostsId] as Hosts | undefined
-  }, [storage, usingHostsId, activeHostsId])
+    return storage[activeHostsId] as Hosts | undefined
+  }, [storage, activeHostsId])
 
   const handleAdd = () => {
     setOperateType('add')
@@ -43,13 +44,35 @@ function App() {
   }
 
   const handleEdit = (item?: MenuItem) => {
-    chrome.storage.sync.set({ [ACTIVE_HOSTS_ID]: item?.id })
     setOperateType('edit')
     setVisible(true)
   }
 
+  useEffect(() => {
+    if (!activeHostsId) {
+      chrome.storage.sync.set({ [ACTIVE_HOSTS_ID]: usingHostsId })
+    }
+  }, [activeHostsId, usingHostsId])
   const handleChange = (item: MenuItem) => {
     chrome.storage.sync.set({ [ACTIVE_HOSTS_ID]: item?.id })
+  }
+
+  const handleSaveHosts = (value?: string) => {
+    const currentHosts = storage[activeHostsId]
+    // 更新 hosts
+    const finalVal = {
+      ...storage,
+      [activeHostsId]: {
+        ...currentHosts,
+        content: value,
+      },
+    }
+
+    chrome.storage.sync.set({ [HOSTS]: finalVal }, () => {
+      // message.success({
+      //   content: `保存成功 ${JSON.stringify(finalVal)}`
+      // })
+    })
   }
 
   const readOnly = activeHosts?.hostsType === HostsTypeEnum.REMOTE
@@ -58,27 +81,30 @@ function App() {
     <div className="faster_hosts" id="faster_hosts">
       <Header readOnly={readOnly} title={activeHosts?.title} onAdd={handleAdd}></Header>
       <div className="faster_hosts_body">
-        <SideMenu id={activeHostsId || usingHostsId} onEditor={handleEdit} onChange={handleChange} list={sideMenuList} />
-        <Editor onChange={(r) => console.log(r)} content={activeHosts?.content} readOnly={readOnly} />
+        <SideMenu id={activeHostsId} onEditor={handleEdit} onChange={handleChange} list={sideMenuList} />
+        <Editor onBlur={handleSaveHosts} onChange={(r) => console.log(r)} content={activeHosts?.content} readOnly={readOnly} />
       </div>
 
       <Drawer
         placement="right"
+        destroyOnClose={true}
         closable={false}
         visible={visible}
         onClose={() => setVisible(false)}
         width="80%"
         getContainer="#faster_hosts"
+        bodyStyle={{ padding: '10px', }}
         style={{ position: 'absolute' }}
       >
         <h3>{operateTypeName[operateType]}</h3>
         <HostsForm
-          id={activeHostsId || usingHostsId}
+          id={activeHostsId}
           type={operateType}
           title={activeHosts?.title}
           hostsType={activeHosts?.hostsType}
           remoteUrl={activeHosts?.remoteUrl}
           updateHostsInterval={activeHosts?.updateHostsInterval}
+          onCancel={() => setVisible(false)}
         >
         </HostsForm>
       </Drawer>
